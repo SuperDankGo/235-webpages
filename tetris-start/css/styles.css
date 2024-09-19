@@ -1,32 +1,23 @@
-/* Do everything in this file */
-h1,h2,h3 {
-    border-bottom: 1px solid red;
-}
-
-h2 {
-    clear: right
+header, main, footer {
+    width: 90vw;
+    margin: 0 auto;
 }
 
 figure {
-    float: right;
-    width: 40%;
+    max-width: 650px;
+    /* overflow: auto; */
+    margin: 0 auto;
 }
 
 figure img {
     width: 100%;
 }
 
-div.tet{
-    border: 1px dotted green;
-    float: left;
-    width: 33%;
+#tetlist {
+    display: flex;
+    flex-flow: row wrap;
 }
 
-footer{
-    clear: both;
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: azure;
-    z-index: -6;
+div.tet {
+    flex: 0 0 450px;
 }
