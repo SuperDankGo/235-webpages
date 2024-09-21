@@ -1,0 +1,83 @@
+body {
+    background-color: #e0afd2;
+}
+
+#bio,
+.projects,
+#homeworks {
+    border-bottom: 1px solid black;
+}
+
+.name {
+    color: #190089;
+    font-weight: bold;
+    text-align: center;
+}
+
+figure {
+    max-width: 240px;
+    margin: 0 auto;
+}
+
+figure img {
+    width: 100%;
+}
+
+#bio {
+    text-align: center;
+    font-size: 18px;
+}
+
+.projects {
+    font-style: italic;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+ul.projects {
+    list-style-type: square;
+    list-style-position: outside;
+    border-bottom: none;
+}
+
+#homeworks {
+    font-style: italic;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+ul#homeworks {
+    border-bottom: none;
+}
+
+ul {
+    display: inline-block;
+    text-align: left;
+    padding:0;
+}
+
+p {
+    color: #190089;
+}
+
+a:link {
+    color: #005557;
+}
+
+a:visited {
+    color: #4d4d4d;
+}
+
+a:focus {
+    font-weight: bold;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+a:active {
+    color: #00555b;
+}
