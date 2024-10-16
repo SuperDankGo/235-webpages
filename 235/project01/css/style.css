@@ -1,0 +1,108 @@
+#layout {
+    display: grid;
+    grid-auto-flow: column;
+    height: 100vh;
+    width: auto;
+    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-areas:
+    "icon  p4    img1"
+    "p1    p5    img2"
+    "p2    p5    img2"
+    "quote quote img3"
+    "p3    p6     img3"
+}
+
+#icon {
+    grid-area: icon;
+    width: 100%;
+}
+
+#icon img
+{
+width: 450px;
+}
+
+#p1, #p2, #p3, #p4, #p5, #p6
+{
+    width: 90%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#p1 {
+    grid-area: p1;
+}
+
+#p2 {
+    grid-area: p2;
+}
+
+#quote {
+    grid-area: quote;
+    font-size: 32px;
+    font-weight: bold;
+    color: darkblue;
+
+    border-top: 1px dotted black;
+    border-bottom: 1px dotted black;
+}
+
+#p3 {
+    grid-area: p3;
+}
+
+#p4 {
+    grid-area: p4;
+}
+
+#p5 {
+    grid-area: p5;
+}
+
+#p6{
+    grid-area: p6;
+}
+
+#img1 {
+    grid-area: img1;
+    width: 100%;
+}
+
+#img1 img{
+width: 100%;
+}
+
+#img2 {
+    grid-area: img2;
+    width: 100%;
+}
+
+#img2 img{
+    height: 20vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#img3 {
+    grid-area: img3;
+    width: 100%;
+}
+
+figcaption{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#icon p{
+    font-family: MonteCarlo;
+    font-size: 36px;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.montecarlo-regular {
+    font-family: "MonteCarlo", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }  
