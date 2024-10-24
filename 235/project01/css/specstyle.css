@@ -15,33 +15,12 @@
 
 #icon {
     grid-area: icon;
+    width: 100%;
 }
 
 #icon img
 {
-width: 150px;
-}
-
-ul
-{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: #333;
-}
-
-li
-{
-    float: left;
-}
-
-li a
-{
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+width: 450px;
 }
 
 #p1, #p2, #p3, #p4, #p5, #p6
