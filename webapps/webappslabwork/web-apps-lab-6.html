@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Web Apps-3-HW</title>
+    <style>
+        body {
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>My Favorites</h1>
+    <h2>My Favorite Games</h2>
+
+    <ol id="gamesList">
+
+    </ol>
+
+    <h2>My Favorite Movies</h2>
+
+    <ol id="moviesList">
+
+    </ol>
+
+    <h2>My Favorite Links</h2>
+
+    <ol id="linksList">
+
+    </ol>
+
+    <script>
+        "use strict";
+        let games = ["Fate/Stay Night", "Xenoblade Chronicles 2", "Persona 4", "Ace Attorney", "Sonic Adventure 2"];
+        let movies = ["A Goofy Movie", "La La Land", "The End of Evangelion", "The Truman Show", "The Hunchback of Notre Dame"];
+
+        let gameList = document.querySelector("#gamesList");
+
+        for (let i = 0; i < games.length; i++) {
+            let listItem = document.createElement("li");
+            listItem.innerHTML = games[i];
+            gameList.appendChild(listItem);
+        }
+
+        let movieList = document.querySelector("#moviesList");
+
+        for (let movie of movies) {
+            let listItems = document.createElement("li");
+            listItems.innerHTML = movie;
+            movieList.appendChild(listItems);
+        }
+
+        // Optional - can you figure out how to pull both the key AND the value
+        // from the `links` object literal?
+        let linkList = document.querySelector("#linksList");
+
+        let links = {
+            "RIT": "http://www.rit.edu",
+            "RWAG": "https://www.facebook.com/RWAGclub",
+            "Anime Club": "https://campusgroups.rit.edu/ritac/rit-anime-club/"
+        }
+
+        /*Already did this in Lab 3*/
+        for (let key in links) {
+            let linkItem = document.createElement("li");
+            linkItem.innerHTML = "<a href='" + links[key] + "'>" + key + "</a>";
+            linkList.appendChild(linkItem);
+        }
+
+    </script>
+</body>
+
+</html>

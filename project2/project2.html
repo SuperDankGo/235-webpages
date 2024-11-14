@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Anime Schedule Finder</title>
+	<link rel="stylesheet" href="project2.css">
+	<script>
+		"use strict";
+		window.onload = init;
+
+		function init() {
+			document.querySelector("#search").onclick = getData;
+		}
+
+		let term = "";
+
+		function getData() {
+			const content = document.getElementById('content');
+			
+			content.innerHTML ="";
+
+			const API_URL = 'https://api.jikan.moe/v4';
+			let url = API_URL;
+			term = document.querySelector("#searchterm").value;
+			term = term.trim();
+			term = encodeURIComponent(term);
+
+			if (term.length < 1) {
+				document.querySelector("#debug").innerHTML = "<b>Enter a search term first!</b>";
+				return;
+			}
+
+			url += `/anime?q=${term}?sfw=true`
+
+			document.querySelector("#debug").innerHTML = `<b>Querying web service with:</b> <a href="${url}" target="_blank">${url}</a>`;
+
+			GetAnime();
+
+			function GetAnime() {
+				fetch(url)
+					.then(response => response.json())
+					.then(data => {
+						data.data.forEach(item => {
+							const anime = item;
+							const imageUrl = item.images;
+							const animeData = document.createElement('div');
+							animeData.innerHTML = `
+            <p></p>
+              <img src ="${imageUrl.jpg.image_url}">
+              <p><b>Title:</b> ${anime.title}</p>
+              <p><b>Japanese Name:</b> ${anime.title_japanese} <p>
+              <p><b>Synopsis:</b> ${anime.synopsis}</p>
+              <p><b>Type:</b> ${anime.type}</p>
+              <p><b>Total Episodes:</b> ${anime.episodes}</p>
+            `;
+
+							content.appendChild(animeData);
+						})
+					});
+			}
+		}
+
+	</script>
+
+</head>
+
+<body>
+	<header>
+		<h1>Anime Search</h1>
+	</header>
+
+	<p>Search Term (enter the name of an anime) -&gt; <input id="searchterm" type="text" size="20" maxlength="20"
+			autofocus value="Dragon Ball" /></p>
+	<p><button type="button" id="search" class="green">Search!</button></p>
+	<p id="debug"></p>
+	<hr>
+	<h2>Results</h2>
+	<div id="content">
+		<p>No data yet!</p>
+	</div>
+
+</body>
+
+</html>
