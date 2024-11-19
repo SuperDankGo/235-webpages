@@ -1,1 +1,42 @@
 *{text-align: center;}
+
+#searchBar{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    grid-template-areas:
+    'sortOrder searchTermUser ascSort';
+}
+
+#searchTermUser{
+    order: 1;
+    margin: auto;
+    grid-area: searchTermUser;
+}
+
+#sortOrder{
+    order: 0;
+    margin: auto;
+    grid-area: sortOrder;
+}
+
+#ascSort{
+    order: 2;
+    margin: auto;
+    grid-area: ascSort;
+}
+
+#content{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+#content div{
+    width: 50%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    padding: 1em;
+}

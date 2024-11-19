@@ -10,13 +10,15 @@ let order = "";
 let radio = "";
 let sort = "";
 let searchBy = "";
+let isNextPage = false;
+let currentPage = 0;
 
 function getData() {
     const content = document.getElementById('content');
+    const pageDiv = document.getElementById('page');
 
     content.innerHTML = "";
 
-    searchBy = document.querySelector("#searchBy").value;
     const API_URL = 'https://api.jikan.moe/v4';
     let url = API_URL;
     term = document.querySelector("#searchterm").value;
@@ -28,30 +30,29 @@ function getData() {
         return;
     }
 
-    if (searchBy == "anime") {
-        url += `/anime?q=${term}?sfw=true`
+    url += `/anime?q=${term}?sfw=true`
 
-        order = document.querySelector("#order").value
+    order = document.querySelector("#order").value
 
-        if (order.length > 1) {
-            url += `&order_by=${order}`
-        }
-
-        radio = document.querySelector("#sort");
-
-        sort = radio.elements["sort"].value;
-
-        url += `&sort=${sort}`
+    if (order.length > 1) {
+        url += `&order_by=${order}`
     }
-    else if (searchBy == "character") {
-        url += `/characters?q=${term}`
-    }
+
+    radio = document.querySelector("#sort");
+
+    sort = radio.elements["sort"].value;
+
+    url += `&sort=${sort}`
+
+    // url += `&limit=20`
+
 
     document.querySelector("#debug").innerHTML = `<b>Querying web service with:</b> <a href="${url}" target="_blank">${url}</a>`;
 
-    GetAnime(searchBy);
+    GetAnime();
+//  GetPages();
 
-    function GetAnime(searchBy) {
+    function GetAnime() {
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -59,8 +60,7 @@ function getData() {
                     const anime = item;
                     const imageUrl = item.images;
                     const animeData = document.createElement('div');
-                    if (searchBy == "anime") {
-                        animeData.innerHTML = `
+                    animeData.innerHTML = `
             <p></p>
               <img src ="${imageUrl.jpg.image_url}">
               <p><b>Title:</b> ${anime.title}</p>
@@ -72,18 +72,30 @@ function getData() {
               <p><b>Total Episodes:</b> ${anime.episodes}</p>
               <p><b>Aired:</b> ${anime.aired.string}</p>
             `;
-                    }
-                    else if (searchBy == "character") {
-                        animeData.innerHTML = `
-            <p></p>
-              <img src ="${imageUrl.jpg.image_url}">
-              <p><b>Name:</b> ${anime.name}</p>
-              <p><b>About:</b> ${anime.about}</p>
-            `;
-                    }
 
                     content.appendChild(animeData);
                 })
             });
+    }
+
+    function GetPages(){
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const page = data.pagination.current_page
+                currentPage = page
+                isNextPage = data.pagination.has_next_page
+                const pageData = document.createElement('div');
+                pageData.innerHTML = `
+                <p>Page: ${page}</p>`
+
+                pageDiv.appendChild(pageData);
+            });
+    }
+
+    function ChangePage(){
+        if (isNextPage == true){
+            currentPage++;
+        }
     }
 }

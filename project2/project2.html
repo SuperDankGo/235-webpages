@@ -15,42 +15,51 @@
 		<h1>Anime Search</h1>
 	</header>
 
-	<p>
-		<label for="searchBy">Choose what you are searching for:</label>
-		<select name="searchBy" id="searchBy">
-			<option value="anime">Anime</option>
-			<option value="character">Character</option>
-		</select>
-	</p>
+	<div id="searchBar">
+		<div id="searchTermUser">
+			<p>Search Term (enter the name of an anime) <br>
+				<input id="searchterm" type="text" size="20" maxlength="20" autofocus value="Dragon Ball" />
+			</p>
+		</div>
 
-	<p>Search Term (enter the name of an anime) <br>
-		<input id="searchterm" type="text" size="20" maxlength="20" autofocus value="Dragon Ball" />
-	</p>
-	<p>
-		<label for="order">Choose a sorting order:</label>
-		<select name="order" id="order">
-			<option value="">Default</option>
-			<option value="title">Title</option>
-			<option value="start_date">Start Date</option>
-			<option value="end_date">End Date</option>
-			<option value="episodes">Episodes</option>
-			<option value="score">Score</option>
-			<option value="rank">Rank</option>
-		</select>
 
-	<form name="sort" id="sort" autofocus value="asc">
-		<input type="radio" id="ascend" name="sort" value="asc">
-		<label for="ascend">Ascending</label><br>
-		<input type="radio" id="descend" name="sort" value="desc">
-		<label for="descend">Descending</label><br>
-	</form>
-	</p>
+		<div id="sortOrder">
+			<p>
+				<label for="order">Choose a sorting order:</label>
+				<select name="order" id="order">
+					<option value="">Default</option>
+					<option value="title">Title</option>
+					<option value="start_date">Start Date</option>
+					<option value="end_date">End Date</option>
+					<option value="episodes">Episodes</option>
+					<option value="score">Score</option>
+					<option value="rank">Rank</option>
+				</select>
+			</p>
+		</div>
+
+		<div id="ascSort">
+			<p>
+			<form name="sort" id="sort" autofocus value="asc">
+				<input type="radio" id="ascend" name="sort" value="asc">
+				<label for="ascend">Ascending</label><br>
+				<input type="radio" id="descend" name="sort" value="desc">
+				<label for="descend">Descending</label><br>
+			</form>
+			</p>
+		</div>
+
+	</div>
 	<p><button type="button" id="search" class="green">Search!</button></p>
 	<p id="debug"></p>
+
 	<hr>
 	<h2>Results</h2>
 	<div id="content">
 		<p>No data yet!</p>
+	</div>
+	<div id="page">
+		
 	</div>
 
 </body>
