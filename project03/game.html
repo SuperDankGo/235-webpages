@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Poker</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+	<div id="rivalHand">
+		<button type="button" id="rCard1"><img src="images/card.png"></button>
+		<button type="button" id="rCard2"><img src="images/card.png"></button>
+		<button type="button" id="rCard3"><img src="images/card.png"></button>
+		<button type="button" id="rCard4"><img src="images/card.png"></button>
+		<button type="button" id="rCard5"><img src="images/card.png"></button>
+	</div>
+
+	<div id="yourHand">
+		<input type="checkbox" id="Card1">
+		<label for='Card1' id="Card1Label"><img src="images/card.png"></label>
+
+		<input type="checkbox" id="Card2">
+		<label for='Card2' id="Card2Label"><img src="images/card.png"></label>
+
+		<input type="checkbox" id="Card3">
+		<label for='Card3' id="Card3Label"><img src="images/card.png"></label>
+
+		<input type="checkbox" id="Card4">
+		<label for='Card4' id="Card4Label"><img src="images/card.png"></label>
+
+		<input type="checkbox" id="Card5">
+		<label for='Card5' id="Card5Label"><img src="images/card.png"></label>
+	</div>
+
+	<div id="playGame">
+		<button type="button" id="start">Start</button>
+		<button type="button" id="hold">Hold</button>
+		<button type="button" id="play">Play</button>
+	</div>
+
+	<div id="results">
+		<p id="pHandType">Your Hand Type: </p>
+		<p id="oHandType">Opponent's Hand Type: </p>
+		<p id="winner">Winner: </p>
+	</div>
+	<!-- External libraries -->
+	<script src="https://pixijs.download/release/pixi.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+
+	<!-- https://github.com/pixijs/pixi.js?utm_source=html5weekly -->
+
+	<!--  https://github.com/goldfire/howler.js -->
+
+
+	<!-- My JS files -->
+	<script src="js/utilities.js"></script>
+	<script src="js/classes.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+
+</html>

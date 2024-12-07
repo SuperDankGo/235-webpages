@@ -1,12 +1,26 @@
 "use strict";
 window.onload = init;
 
+//sets all the inital events to load on clicks and loads in the stored search term
 function init() {
     document.querySelector("#search").onclick = getData;
     document.querySelector("#prevPage").onclick = ChangePagePrev;
     document.querySelector("#nextPage").onclick = ChangePageNext;
+
+    let searchTerm;
+    const prefixIn = "bzd4328-";
+    const termKeyIn = prefixIn + "term";
+    const storedTermIn = localStorage.getItem(termKeyIn);
+
+    if (storedTermIn) {
+        searchTerm = storedTermIn;
+    } else {
+        searchTerm = "";
+    }
+    document.querySelector("#searchterm").value = searchTerm;
 }
 
+//variables for later
 let term = "";
 let prevTerm = null;
 let order = "";
@@ -16,10 +30,15 @@ let searchBy = "";
 let isNextPage = false;
 let currentPage = 1;
 let pageCount = 0;
+let prevOrder = null;
+const prefix = "bzd4328-";
+const termKey = prefix + "term";
 
+
+//gets the search term and all the other sorting terms from the document and then loads the query from the values
 function getData() {
-    const content = document.getElementById('content');
-    const pageDiv = document.getElementById('page');
+    const content = document.querySelector("#content");
+    const pageDiv = document.querySelector("#page");
 
     content.innerHTML = "";
     pageDiv.innerHTML = "";
@@ -27,6 +46,7 @@ function getData() {
     const API_URL = 'https://api.jikan.moe/v4';
     let url = API_URL;
     term = document.querySelector("#searchterm").value;
+    localStorage.setItem(termKey, term);
     term = term.trim();
     term = encodeURIComponent(term);
 
@@ -35,11 +55,9 @@ function getData() {
         return;
     }
 
-    if (term != prevTerm && prevTerm != null){
-        currentPage = 1;
-    }
+    
 
-    url += `/anime?q=${term}?sfw=true`
+    url += `/anime?q=${term}?`
 
     order = document.querySelector("#order").value
 
@@ -47,11 +65,15 @@ function getData() {
         url += `&order_by=${order}`
     }
 
+if ((term != prevTerm && prevTerm != null) || (order != prevOrder && prevOrder != null)) {
+        currentPage = 1;
+    }
+
     radio = document.querySelector("#sort");
 
     sort = radio.elements["sort"].value;
 
-    url += `&sort=${sort}&limit=20&page=${currentPage}`;
+    url += `&sort=${sort}&limit=20&page=${currentPage}&sfw=true`;
 
     document.querySelector("#debug").innerHTML = `<b>Querying web service with:</b> <a href="${url}" target="_blank">${url}</a>`;
 
@@ -59,7 +81,9 @@ function getData() {
     GetPages();
 
     prevTerm = term;
+    prevOrder = order;
 
+    //Loads all the anime search data from the API on to the website
     function GetAnime() {
         fetch(url)
             .then(response => response.json())
@@ -80,7 +104,9 @@ function getData() {
               <p><b>Rank:</b> ${anime.rank}</p>
               <p><b>Type:</b> ${anime.type}</p>
               <p><b>Total Episodes:</b> ${anime.episodes}</p>
+              <p><b>Status:</b> ${anime.status}</p>
               <p><b>Aired:</b> ${anime.aired.string}</p>
+              <p><b>Rating:</b> ${anime.rating}</p>
             `;
                     }
                     else {
@@ -93,7 +119,9 @@ function getData() {
                           <p><b>Rank:</b> ${anime.rank}</p>
                           <p><b>Type:</b> ${anime.type}</p>
                           <p><b>Total Episodes:</b> ${anime.episodes}</p>
+                          <p><b>Status:</b> ${anime.status}</p>
                           <p><b>Aired:</b> ${anime.aired.string}</p>
+                          <p><b>Rating:</b> ${anime.rating}</p>
                         `;
                     }
 
@@ -102,6 +130,7 @@ function getData() {
             });
     }
 
+    //Gets the total amount of pages for the searched term
     function GetPages() {
         fetch(url)
             .then(response => response.json())
@@ -119,6 +148,7 @@ function getData() {
     }
 }
 
+//Goes to the previous page
 function ChangePagePrev() {
     if (currentPage > 1) {
         currentPage--;
@@ -126,6 +156,7 @@ function ChangePagePrev() {
     }
 }
 
+//Goes to the next page
 function ChangePageNext() {
     if (isNextPage == true && currentPage != pageCount) {
         currentPage++;
